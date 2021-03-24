@@ -1,0 +1,157 @@
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Final Assesment</title>
+  <link href="/assets/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+	<link rel="stylesheet" href="/assets/assets2/vendor/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/assets/assets2/vendor/font-awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" href="/assets/assets2/vendor/linearicons/style.css">
+	<link rel="stylesheet" href="/assets/assets2/vendor/chartist/css/chartist-custom.css">
+	<link rel="stylesheet" href="/assets/assets2/css/main.css">
+	<link rel="stylesheet" href="/assets/assets2/css/demo.css">
+	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet">
+	<link rel="icon" type="image/png" sizes="96x96" href="/assets/assets2/img/favicon.png">
+</head>
+<body>
+  <div id="wrapper">
+		<nav class="navbar navbar-default navbar-fixed-top">
+			<div class="brand">
+			</div>
+					<div class="container-fluid">
+				<div class="navbar-btn">
+					<button type="button" class="btn-toggle-fullwidth"><i class="lnr lnr-arrow-left-circle"></i></button>
+				</div>
+			</div>
+		</nav>
+		<div id="sidebar-nav" class="sidebar">
+			<div class="sidebar-scroll">
+				<nav>
+					<ul class="nav">
+						<li><a href="index.html" class="active"><i class="lnr lnr-home"></i> <span>Dashboard</span></a></li>
+            <li><a href="/emp" class=""><i class="lnr lnr-users"></i> <span>Employee List</span></a></li>
+            <li><a href="/org" class=""><i class="lnr lnr-database"></i> <span>Survey List</span></a></li>
+					</ul>
+				</nav>
+			</div>
+		</div>
+
+		<div class="main">
+      <br>
+        <div class="col-md-10">
+          <div class="panel">
+            <div class="panel-heading">
+              <h2>Employee List</h2>
+            </div>
+            <div class="panel-body">
+              <table class="table table-striped" id="mytable">
+                <thead>
+                    <tr>
+                    <th>Employee ID</th>
+                    <th>Username</th>
+                    <th>Password</th>
+                    <th>Serial Number</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each data1}}
+                    <tr>
+                    <td>{{ employee_id }}</td>
+                    <td>{{ username }}</td>
+                    <td>{{ password }}</td>
+                    <td>{{ serial_number }}</td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-10">
+          <div class="panel">
+            <div class="panel-heading">
+              <h2>New Record</h2>
+            </div>
+            <div class="panel-body">
+              <table class="table table-striped" id="mytable">
+                <thead>
+                    <tr>
+                    <th>Date</th>
+                    <th>Nama</th>
+                    <th>Tempat, Tanggal Lahir</th>
+                    <th>Alamat</th>
+                    <th>Surveyor ID</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each data}}
+                    <tr>
+                    <td>{{ timestamp }}</td>
+                    <td>{{ nik }}</td>
+                    <td>{{ ttl }}</td>
+                    <td>{{ alamat }}</td>
+                    <td>{{ user_id }}</td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+		</div>
+		<div class="clearfix"></div>
+	</div>
+
+  <script src="/assets/js/jquery-3.3.1.js"></script>
+  <script src="/assets/js/bootstrap.js"></script>
+
+  <script src="/assets/assets2/vendor/jquery/jquery.min.js"></script>
+	<script src="/assets/assets2/vendor/bootstrap/js/bootstrap.min.js"></script>
+	<script src="/assets/assets2/vendor/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+	<script src="/assets/assets2/vendor/jquery.easy-pie-chart/jquery.easypiechart.min.js"></script>
+	<script src="/assets/assets2/vendor/chartist/js/chartist.min.js"></script>
+	<script src="/assets/assets2/scripts/klorofil-common.js"></script>
+<script>
+    document.getElementById("content").innerHTML='<object type="text/html" data="/tb" ></object>';
+    $(document).ready(function(){
+			//showing data to modal for edit record
+      $('#mytable').on('click','.edit',function(){
+        var user_id = $(this).data('user_id');
+        var employee_id = $(this).data('employee_id');
+        var username = $(this).data('username');
+        var password = $(this).data('password');
+        var serial_number = $(this).data('serial_number');
+        $('#EditModal').modal('show');
+        $('.user_id').val(user_id);
+        $('.employee_id').val(employee_id);
+        $('.username').val(username);
+        $('.password').val(password);
+        $('.serial_number').val(serial_number);
+      });
+			//showing modal for delete record
+			$('#mytable').on('click','.delete',function(){
+        var user_id = $(this).data('user_id');
+        $('#DeleteModal').modal('show');
+        $('.user_id2').val(user_id);
+      });
+      //showing modal for view data
+      $('#mytable').on('click','.view',function(){
+        var user_id = $(this).data('user_id');
+        var employee_id = $(this).data('employee_id');
+        var username = $(this).data('username');
+        var password = $(this).data('password');
+        var serial_number = $(this).data('serial_number');
+        $('#ViewModal').modal('show');
+        $('.employee_id').val(employee_id);
+        $('.username').val(username);
+        $('.password').val(password);
+        $('.serial_number').val(serial_number);
+      });
+    });
+
+
+
+    
+</script>
+</body>
+</html>

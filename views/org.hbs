@@ -1,0 +1,386 @@
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Final Assesment</title>
+  <link href="/assets/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+	<link rel="stylesheet" href="/assets/assets2/vendor/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/assets/assets2/vendor/font-awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" href="/assets/assets2/vendor/linearicons/style.css">
+	<link rel="stylesheet" href="/assets/assets2/vendor/chartist/css/chartist-custom.css">
+	<link rel="stylesheet" href="/assets/assets2/css/main.css">
+	<link rel="stylesheet" href="/assets/assets2/css/demo.css">
+	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet">
+	<link rel="icon" type="image/png" sizes="96x96" href="/assets/assets2/img/favicon.png">
+</head>
+<body>
+
+  <div id="wrapper">
+		<nav class="navbar navbar-default navbar-fixed-top">
+			<div class="brand">
+			</div>
+					<div class="container-fluid">
+				<div class="navbar-btn">
+					<button type="button" class="btn-toggle-fullwidth"><i class="lnr lnr-arrow-left-circle"></i></button>
+				</div>
+			</div>
+		</nav>
+		<div id="sidebar-nav" class="sidebar">
+			<div class="sidebar-scroll">
+				<nav>
+					<ul class="nav">
+						<li><a href="/" class="active"><i class="lnr lnr-home"></i> <span>Dashboard</span></a></li>
+            <li><a href="/emp" class=""><i class="lnr lnr-users"></i> <span>Employee List</span></a></li>
+            <li><a href="/org" class=""><i class="lnr lnr-database"></i> <span>Survey List</span></a></li>
+					</ul>
+				</nav>
+			</div>
+		</div>
+
+		<div class="main">
+        <br>
+        <div class="col-md-10">
+          <div class="panel">
+            <div class="panel-heading">
+              <h2><span class="lnr lnr-database"></span> Survey List</h2>
+            </div>
+            <div class="panel-body">
+            <table class="table table-hover" id="mytable">
+            <thead>
+              <tr>
+                <th>NIK</th>
+                <th>Nama</th>
+                <th>Tempat, Tanggal Lahir</th>
+                <th>Alamat</th>
+                <th>Waktu Survey</th>
+                <th>Validasi</th>
+                <th>Approval</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody> 
+              {{#each results}}
+              <tr>
+                <td id="nik">{{ nik }}</td>
+                <td id="nama">{{ nama }}</td>
+                <td id="ttl">{{ ttl }}</td>
+                <td id="alamat">{{ alamat }}</td>
+                <td id="alamat">{{ timestamp }}</td>
+                <td ><p id="element"> {{result}} </p></td>
+                <td>{{ approval }}</p></td>
+                <td>
+                  <a href="javascript:void(0);" class="btn btn-sm btn-info view" 
+                  data-nik="{{ nik }}" data-nama="{{ nama }}" data-ttl="{{ ttl }}" data-jenis="{{ jenis }}" data-gol="{{ gol }}" data-alamat="{{ alamat }}" data-rtrw="{{ rtrw }}" data-kelurahan="{{ kelurahan }}" data-kecamatan="{{ kecamatan }}" data-agama="{{ agama }}" data-status="{{ status }}" data-pekerjaan="{{ pekerjaan }}" data-kewarganegaraan="{{ kewarganegaraan }}" data-time="{{ time }}"
+                  data-org_nik="{{org_nik}}" data-org_nama="{{org_nama}}" data-org_ttl="{{org_ttl}}" data-org_jenis="{{org_jenis}}" data-org_gol="{{org_gol}}" data-org_alamat="{{org_alamat}}" data-org_rtrw="{{org_rtrw}}" data-org_kelurahan="{{org_kelurahan}}" data-org_kecamatan="{{org_kecamatan}}" data-org_agama="{{org_agama}}" data-org_status="{{org_status}}" data-org_pekerjaan="{{org_pekerjaan}}" data-org_kewarganegaraan="{{org_kewarganegaraan}}" 
+                  data-location={{location}} data-nik2="{{ nik }}" data-id="{{ id }}"><i class="fa fa-info-circle"></i> View</a>
+                  {{!-- <a href="javascript:void(0);" class="btn btn-sm btn-success approve" data-id="{{ id }}" data-result="{{ result }}">approve</a> --}}
+                </td>
+              </tr>
+              {{/each}}
+            </tbody>
+          </table>
+
+            </div>
+
+
+          </div>
+
+        </div>
+		</div>
+		<div class="clearfix"></div>
+		<footer>
+			<div class="container-fluid">
+				<p class="copyright">&copy; 2017 <a href="https://www.themeineed.com" target="_blank">Theme I Need</a>. All Rights Reserved.</p>
+			</div>
+		</footer>
+	</div>
+  
+  <form>
+       <div class="modal fade" id="ViewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h3 class="modal-title" id="exampleModalLabel">Consument Detail</h3>
+              <h5 class="modal-title" id="exampleModalLabel">Berikut ini adalah detail dari KTP konsumen</h5>
+            </div>
+            <div class="modal-body">
+              <table>
+                <tr>
+                  <td width="300px" class="modal-title">Origin record from OCR</td>
+                  <td width="50px"></td>
+                  <td width="300px" class="modal-title">Record from field Employee</td>
+                </tr>
+                <tr>
+                  <td>
+                    <br>
+                    <div class="form-group">
+                        <h5 class="modal-title" id="exampleModalLabel">NIK</h5>
+                        <input type="text" name="org_nik" class="form-control org_nik" placeholder="username" readonly>
+                    </div>
+
+                    <div class="form-group">
+                        <h5 class="modal-title" id="exampleModalLabel">Nama</h5>
+                        <input type="text" name="org_nama" class="form-control org_nama" placeholder="username" readonly>
+                    </div>
+
+                    <div class="form-group">
+                      <h5 class="modal-title" id="exampleModalLabel">Tempat, Tanggal Lahir</h5>
+                        <input type="text" name="org_ttl" class="form-control org_ttl" placeholder="username" readonly>
+                    </div>
+
+                    <div class="form-group">
+                      <h5 class="modal-title" id="exampleModalLabel">Jenis Kelamin</h5>
+                        <input type="text" name="org_jenis" class="form-control org_jenis" placeholder="username" readonly>
+                    </div>
+
+                    <div class="form-group">
+                      <h5 class="modal-title" id="exampleModalLabel">Golongan Darah</h5>
+                        <input type="text" name="org_gol" class="form-control org_gol" placeholder="username" readonly>
+                    </div>
+
+                    <div class="form-group">
+                      <h5 class="modal-title" id="exampleModalLabel">Alamat</h5>
+                        <input type="text" name="org_alamat" class="form-control org_alamat" placeholder="username" readonly>
+                    </div>
+
+                    <div class="form-group">
+                      <h5 class="modal-title" id="exampleModalLabel">RTRW</h5>
+                        <input type="text" name="org_rtrw" class="form-control org_rtrw" placeholder="username" readonly>
+                    </div>
+
+                    <div class="form-group">
+                      <h5 class="modal-title" id="exampleModalLabel">Kelurahan</h5>
+                        <input type="text" name="org_kelurahan" class="form-control org_kelurahan" placeholder="username" readonly>
+                    </div>
+
+                    <div class="form-group">
+                      <h5 class="modal-title" id="exampleModalLabel">Kecamatan</h5>
+                        <input type="text" name="org_kecamatan" class="form-control org_kecamatan" placeholder="username" readonly>
+                    </div>
+
+                    <div class="form-group">
+                      <h5 class="modal-title" id="exampleModalLabel">Agama</h5>
+                        <input type="text" name="org_agama" class="form-control org_agama" placeholder="username" readonly>
+                    </div>
+
+                    <div class="form-group">
+                      <h5 class="modal-title" id="exampleModalLabel">Status Perkawinan</h5>
+                        <input type="text" name="org_status" class="form-control org_status" placeholder="username" readonly>
+                    </div>
+
+                    <div class="form-group">
+                      <h5 class="modal-title" id="exampleModalLabel">Pekerjaan</h5>
+                        <input type="text" name="org_pekerjaan" class="form-control org_pekerjaan" placeholder="username" readonly>
+                    </div>
+
+                    <div class="form-group">
+                      <h5 class="modal-title" id="exampleModalLabel">Kewarganegaraan</h5>
+                        <input type="text" name="org_kewarganegaraan" class="form-control org_kewarganegaraan" placeholder="username" readonly>
+                    </div>
+                  </td>
+                  <td></td>
+                  <td>
+                    <br>
+                    <div class="form-group">
+                      <h5 class="modal-title" id="exampleModalLabel">NIK</h5>
+                        <input type="text" name="nik" class="form-control nik" placeholder="username" readonly>
+                    </div>
+
+                    <div class="form-group">
+                      <h5 class="modal-title" id="exampleModalLabel">Nama</h5>
+                        <input type="text" name="nama" class="form-control nama" placeholder="Password" readonly>
+                    </div>
+
+                    <div class="form-group">
+                      <h5 class="modal-title" id="exampleModalLabel">Tempat, Tanggal Lahir</h5>
+                        <input type="text" name="ttl" class="form-control ttl" placeholder="Serial Number" readonly>
+                    </div>
+
+                    <div class="form-group">
+                      <h5 class="modal-title" id="exampleModalLabel">Jenis Kelamin</h5>
+                        <input type="text" name="jenis" class="form-control jenis" placeholder="Serial Number" readonly>
+                    </div>
+
+                    <div class="form-group">
+                      <h5 class="modal-title" id="exampleModalLabel">Golongan Darah</h5>
+                        <input type="text" name="gol" class="form-control gol" placeholder="Serial Number" readonly>
+                    </div>
+
+                    <div class="form-group">
+                      <h5 class="modal-title" id="exampleModalLabel">Alamat</h5>
+                        <input type="text" name="alamat" class="form-control alamat" placeholder="Serial Number" readonly>
+                    </div>
+
+                    <div class="form-group">
+                      <h5 class="modal-title" id="exampleModalLabel">RTRW</h5>
+                        <input type="text" name="rtrw" class="form-control rtrw" placeholder="Serial Number" readonly>
+                    </div>
+
+                    <div class="form-group">
+                      <h5 class="modal-title" id="exampleModalLabel">Kelurahan</h5>
+                        <input type="text" name="kelurahan" class="form-control kelurahan" placeholder="Serial Number" readonly>
+                    </div>
+
+                    <div class="form-group">
+                      <h5 class="modal-title" id="exampleModalLabel">Kecamatan</h5>
+                        <input type="text" name="kecamatan" class="form-control kecamatan" placeholder="Serial Number" readonly>
+                    </div>
+
+                    <div class="form-group">
+                      <h5 class="modal-title" id="exampleModalLabel">Agama</h5>
+                        <input type="text" name="agama" class="form-control agama" placeholder="Serial Number" readonly>
+                    </div>
+
+                    <div class="form-group">
+                      <h5 class="modal-title" id="exampleModalLabel">Status Perkawinan</h5>
+                        <input type="text" name="status" class="form-control status" placeholder="Serial Number" readonly>
+                    </div>
+
+                    <div class="form-group">
+                      <h5 class="modal-title" id="exampleModalLabel">Pekerjaan</h5>
+                        <input type="text" name="pekerjaan" class="form-control pekerjaan" placeholder="Serial Number" readonly>
+                    </div>
+
+                    <div class="form-group">
+                      <h5 class="modal-title" id="exampleModalLabel">Kewarganegaraan</h5>
+                        <input type="text" name="kewarganegaraan" class="form-control kewarganegaraan" placeholder="Serial Number" readonly>
+                    </div>
+                  </td>
+                </tr>
+              </table>
+            </div>
+            <div class="modal-footer">
+              <input type="hidden" name="id" class="id">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-success" data-toggle="modal" data-target="#EditModal" data-dismiss="modal"><i class="lnr lnr-checkmark-circle"></i> Approve</button>
+              <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#EditModal2" data-dismiss="modal"><i class="lnr lnr-cross-circle"></i> Not Approve</button>
+            </div>
+          </div>
+        </div>
+      </div>
+  </form>
+
+  <form action="/update_org" method="post">
+    <div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 class="modal-title" id="exampleModalLabel">Approval</h3>
+            </button>
+          </div>
+          <div class="modal-body">
+             <h5 class="modal-titile">Are You Sure Want To Approve This Data?</h5>
+          </div>
+          <div class="modal-footer">
+            <input type="hidden" name="id" class="id">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+              <button type="submit" class="btn btn-success"><i class="lnr lnr-checkmark-circle"></i> Yes, Approve it!</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+
+    <form action="/update2_org" method="post">
+    <div class="modal fade" id="EditModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 class="modal-title" id="exampleModalLabel">Approval</h3>
+          </div>
+          <div class="modal-body">
+             <h5 class="modal-title">You're going to not Approve this data</h5>
+             <h5 class="modal-title">Are you sure?</h5>
+          </div>
+          <div class="modal-footer">
+              <input type="hidden" name="id" class="id">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+              <button type="submit" class="btn btn-danger"><i class="lnr lnr-cross-circle"></i> Not Approve!</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+
+
+<script src="/assets/js/jquery-3.3.1.js"></script>
+<script src="/assets/js/bootstrap.js"></script>
+
+  <script src="/assets/assets2/vendor/jquery/jquery.min.js"></script>
+	<script src="/assets/assets2/vendor/bootstrap/js/bootstrap.min.js"></script>
+	<script src="/assets/assets2/vendor/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+	<script src="/assets/assets2/vendor/jquery.easy-pie-chart/jquery.easypiechart.min.js"></script>
+	<script src="/assets/assets2/vendor/chartist/js/chartist.min.js"></script>
+	<script src="/assets/assets2/scripts/klorofil-common.js"></script>
+<script>
+
+    $(document).ready(function(){
+      $('#mytable').on('click','.view',function(){
+        var id = $(this).data('id');
+        var nik = $(this).data('nik');
+        var nama = $(this).data('nama');
+        var ttl = $(this).data('ttl');
+        var jenis = $(this).data('jenis');
+        var gol = $(this).data('gol');
+        var alamat = $(this).data('alamat');
+        var rtrw = $(this).data('rtrw');
+        var kelurahan = $(this).data('kelurahan');
+        var kecamatan = $(this).data('kecamatan');
+        var agama = $(this).data('agama');
+        var status = $(this).data('status');
+        var pekerjaan = $(this).data('pekerjaan');
+        var kewarganegaraan = $(this).data('kewarganegaraan');
+        var berlaku = $(this).data('berlaku');
+        var time = $(this).data('time');
+        var date = new Date(time), mnth = ("0" + (date.getMonth() + 1)).slice(-2),day = ("0" + date.getDate()).slice(-2);
+        var times = new Date(time), hour = ("0" + (date.getHours() + 1)).slice(-2), minute = ("0" +date.getMinutes()).slice(-2);
+        var myDate = [date.getFullYear(), mnth, day].join("-");
+        var myTime = [hour,minute].join(":");
+        var org_nik = $(this).data('org_nik');
+        var org_nama = $(this).data('org_nama');
+        var org_ttl = $(this).data('org_ttl');
+        var org_jenis = $(this).data('org_jenis');
+        var org_gol = $(this).data('org_gol');
+        var org_alamat = $(this).data('org_alamat');
+        var org_rtrw = $(this).data('org_rtrw');
+        var org_kelurahan = $(this).data('org_kelurahan');
+        var org_kecamatan= $(this).data('org_kecamatan');
+        var org_agama = $(this).data('org_agama');
+        var org_status = $(this).data('org_status');
+        var org_pekerjaan= $(this).data('org_pekerjaan');
+        var org_kewarganegaraan= $(this).data('org_kewarganegaraan');
+        var location = $(this).data('location');
+        var id = $(this).data('id');
+        $('#ViewModal').modal('show');
+        $('.nik').val(nik);
+        $('.nama').val(nama);
+        $('.ttl').val(ttl);
+        $('.jenis').val(jenis);
+        $('.gol').val(gol);
+        $('.alamat').val(alamat);
+        $('.rtrw').val(rtrw);
+        $('.kelurahan').val(kelurahan);
+        $('.kecamatan').val(kecamatan);
+        $('.agama').val(agama);
+        $('.status').val(status);
+        $('.pekerjaan').val(pekerjaan);
+        $('.kewarganegaraan').val(kewarganegaraan);
+        $('.time').val(myDate+" "+myTime);
+        $('.org_nik').val(org_nik);
+        $('.org_nama').val(org_nama);
+        $('.org_ttl').val(org_ttl);
+        $('.org_jenis').val(org_jenis);
+        $('.org_gol').val(org_gol);
+        $('.org_alamat').val(org_alamat);
+        $('.org_rtrw').val(org_rtrw);
+        $('.org_kelurahan').val(org_kelurahan);
+        $('.org_kecamatan').val(org_kecamatan);
+        $('.org_agama').val(org_agama);
+        $('.org_status').val(org_status);
+        $('.org_pekerjaan').val(org_pekerjaan);
+        $('.org_kewarganegaraan').val(org_kewarganegaraan);
+        $('.id').val(id);
+      });
+    });
+</script>
+</body>
+</html>

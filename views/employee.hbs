@@ -1,0 +1,269 @@
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Final Assesment</title>
+  <link href="/assets/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+	<link rel="stylesheet" href="/assets/assets2/vendor/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/assets/assets2/vendor/font-awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" href="/assets/assets2/vendor/linearicons/style.css">
+	<link rel="stylesheet" href="/assets/assets2/vendor/chartist/css/chartist-custom.css">
+	<link rel="stylesheet" href="/assets/assets2/css/main.css">
+	<link rel="stylesheet" href="/assets/assets2/css/demo.css">
+	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet">
+	<link rel="icon" type="image/png" sizes="96x96" href="/assets/assets2/img/favicon.png">
+</head>
+<body>
+  <div id="wrapper">
+		<nav class="navbar navbar-default navbar-fixed-top">
+			<div class="brand">
+			</div>
+					<div class="container-fluid">
+				<div class="navbar-btn">
+					<button type="button" class="btn-toggle-fullwidth"><i class="lnr lnr-arrow-left-circle"></i></button>
+				</div>
+			</div>
+		</nav>
+		<div id="sidebar-nav" class="sidebar">
+			<div class="sidebar-scroll">
+				<nav>
+					<ul class="nav">
+						<li><a href="/" class="active"><i class="lnr lnr-home"></i> <span>Dashboard</span></a></li>
+            <li><a href="/emp" class=""><i class="lnr lnr-users"></i> <span>Employee List</span></a></li>
+            <li><a href="/org" class=""><i class="lnr lnr-database"></i> <span>Survey List</span></a></li>
+					</ul>
+				</nav>
+			</div>
+		</div>
+
+		<div class="main">
+      <br>
+      <div class="col-md-10">
+        <div class="panel">
+          <div class="panel-heading">
+            <h2><span class="lnr lnr-users"></span> Employee List</h2>
+          </div>
+          <div class="panel-body">
+            <button class="btn btn-success" data-toggle="modal" data-target="#myModalAdd"><i class="fa fa-plus-square"></i> Add New</button>
+          </div>
+          <div class="panel-body">
+            <table class="table table-hover" id="mytable">
+              <thead>
+                <tr>
+                  <th>Employee ID</th>
+                  <th>Username</th>
+                  <th>Password</th>
+                  <th>Serial Number</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+              {{#each results}}
+                <tr>
+                  <td>{{ employee_id }}</td>
+                  <td>{{ username }}</td>
+                  <td>{{ password }}</td>
+                  <td>{{ serial_number }}</td>
+                  <td>
+                    <a href="javascript:void(0);" class="btn btn-sm btn-warning  edit" data-user_id="{{ user_id }}" data-employee_id="{{ employee_id }}" data-username="{{ username }}" data-password="{{ password }}" data-serial_number="{{ serial_number }}"><i class="lnr lnr-pencil"></i> Action for this employee</a>
+                    <a href="javascript:void(0);" class=" btn btn-sm btn-danger delete" data-user_id="{{ user_id }}"><i class="fa fa-trash-o"></i> Delete</a>
+                    <a href="javascript:void(0);" class="btn btn-sm btn-info view" data-id="{{ user_id }}" data-employee_id="{{ employee_id }}" data-username="{{ username }}" data-password="{{ password }}" data-serial_number="{{ serial_number }}"><i class="fa fa-info-circle"></i> View</a>
+                  </td>
+                </tr>
+                {{/each}}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+		</div>
+		<div class="clearfix"></div>
+	</div>
+
+
+
+	<!-- Add New Product Modal-->
+	  <form action="/save" method="post">
+        <div class="modal fade" id="myModalAdd" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+         <div class="modal-dialog" role="document">
+           <div class="modal-content">
+             <div class="modal-header">
+               <h3 class="modal-title" id="exampleModalLabel">Add new Employee</h3>
+             </div>
+             <div class="modal-body">
+              <div class="form-group">
+                  <h7>Employee ID</h7>
+                 <input type="text" name="employee_id" class="form-control" placeholder="Employee ID" required>
+               </div>
+
+               <div class="form-group">
+                  <h7>Username</h7>
+                 <input type="text" name="username" class="form-control" placeholder="Username" required>
+               </div>
+
+               <div class="form-group">
+                  <h7>Password</h7>
+                  <input type="text" name="password" class="form-control" placeholder="Password" required>
+               </div>
+
+               <div class="form-group">
+                  <h7>Serial Number</h7>
+                  <input type="text" name="serial_number" class="form-control" placeholder="Device Serial Number" required>
+               </div>
+             </div>
+             <div class="modal-footer">
+               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+               <button type="submit" class="btn btn-success"><i class="fa fa-plus-square"></i>Save</button>
+             </div>
+           </div>
+         </div>
+        </div>
+	 </form>
+
+	 <!-- Edit Product Modal-->
+   <form action="/update" method="post">
+       <div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h3 class="modal-title" id="exampleModalLabel">Change Employee</h3>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="form-group">
+                  <h7>Employee ID</h7>
+                  <input type="text" name="employee_id" class="form-control employee_id" placeholder="Employee ID" readonly>
+              </div>
+
+              <div class="form-group">
+                  <h7>Username</h7>
+                  <input type="text" name="username" class="form-control username" placeholder="username" required>
+              </div>
+
+              <div class="form-group">
+                  <h7>Password</h7>
+                  <input type="text" name="password" class="form-control password" placeholder="Password" required>
+              </div>
+
+              <div class="form-group">
+                  <h7>Serial Number</h7>
+                  <input type="text" name="serial_number" class="form-control serial_number" placeholder="Serial Number" readonly>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <input type="hidden" name="user_id" class="user_id">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+              <button type="submit" class="btn btn-primary"><i class="lnr lnr-pencil"></i> Update</button>
+            </div>
+          </div>
+        </div>
+       </div>
+  </form>
+  <!-- view Product Modal-->
+  <form>
+       <div class="modal fade" id="ViewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h3 class="modal-title" id="exampleModalLabel">Employee Detail</h3>
+            </div>
+            <div class="modal-body">
+              <div class="form-group">
+                  <h7>Employee ID</h7>
+                  <input type="text" name="employee_id" class="form-control employee_id" placeholder="Employee ID" readonly>
+              </div>
+
+              <div class="form-group">
+                  <h7>Username</h7>
+                  <input type="text" name="username" class="form-control username" placeholder="username" readonly>
+              </div>
+
+              <div class="form-group">
+                  <h7>Password</h7>
+                  <input type="text" name="password" class="form-control password" placeholder="Password" readonly>
+              </div>
+
+               <div class="form-group">
+                  <h7>Serial Number</h7>
+                  <input type="text" name="serial_number" class="form-control serial_number" placeholder="Serial Number" readonly>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <input type="hidden" name="user_id" class="user_id">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+       </div>
+  </form>
+
+	 <!-- Delete Product Modal-->
+ 	  <form id="add-row-form" action="/delete" method="post">
+ 	     <div class="modal fade" id="DeleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+ 	        <div class="modal-dialog">
+ 	           <div class="modal-content">
+ 	               <div class="modal-header">
+									 	<h5 class="modal-title" id="myModalLabel">Delete Employee</h5>
+ 	               </div>
+ 	               <div class="modal-body">
+												 <strong>Are You Sure To Delete This Data?</strong>
+ 	               </div>
+ 	               <div class="modal-footer">
+									 		<input type="hidden" name="user_id" class="form-control user_id2" required>
+ 	                   	<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+ 	                  	<button type="submit" class="btn btn-danger"><i class="fa fa-trash-o"></i> Delete</button>
+ 	               </div>
+ 	      			</div>
+ 	        </div>
+ 	     </div>
+ 	 </form>
+
+<script src="/assets/js/jquery-3.3.1.js"></script>
+<script src="/assets/js/bootstrap.js"></script>
+
+  <script src="/assets/assets2/vendor/jquery/jquery.min.js"></script>
+	<script src="/assets/assets2/vendor/bootstrap/js/bootstrap.min.js"></script>
+	<script src="/assets/assets2/vendor/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+	<script src="/assets/assets2/vendor/jquery.easy-pie-chart/jquery.easypiechart.min.js"></script>
+	<script src="/assets/assets2/vendor/chartist/js/chartist.min.js"></script>
+	<script src="/assets/assets2/scripts/klorofil-common.js"></script>
+<script>
+    $(document).ready(function(){
+			//showing data to modal for edit record
+      $('#mytable').on('click','.edit',function(){
+        var user_id = $(this).data('user_id');
+        var employee_id = $(this).data('employee_id');
+        var username = $(this).data('username');
+        var password = $(this).data('password');
+        var serial_number = $(this).data('serial_number');
+        $('#EditModal').modal('show');
+        $('.user_id').val(user_id);
+        $('.employee_id').val(employee_id);
+        $('.username').val(username);
+        $('.password').val(password);
+        $('.serial_number').val(serial_number);
+      });
+			//showing modal for delete record
+			$('#mytable').on('click','.delete',function(){
+        var user_id = $(this).data('user_id');
+        $('#DeleteModal').modal('show');
+        $('.user_id2').val(user_id);
+      });
+      //showing modal for view data
+      $('#mytable').on('click','.view',function(){
+        var user_id = $(this).data('user_id');
+        var employee_id = $(this).data('employee_id');
+        var username = $(this).data('username');
+        var password = $(this).data('password');
+        var serial_number = $(this).data('serial_number');
+        $('#ViewModal').modal('show');
+        $('.employee_id').val(employee_id);
+        $('.username').val(username);
+        $('.password').val(password);
+        $('.serial_number').val(serial_number);
+      });
+
+    });
+    
+</script>
+</body>
+</html>
